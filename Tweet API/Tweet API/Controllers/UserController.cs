@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using System.Threading.Tasks;
 using Tweet_API.DTO;
 using Tweet_API.Models;
@@ -13,7 +17,7 @@ namespace Tweet_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : ApiController
     {
        public readonly IUserRepository _userRepository;
         TweetDataContext db = new TweetDataContext();
@@ -29,18 +33,35 @@ namespace Tweet_API.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] UserDTO user)
+        public void  Post([FromBody] Users user)
         {
-            Users u = new Users
-            {
-                FirstName = user.FirstName,
-                Lastname = user.Lastname,
-                Gender = user.Gender,
-                Dob = user.Dob,
-                Email = user.Email,
-                Password = user.Password
-            };
-            _userRepository.Add(u);
+            _userRepository.Add(user);
+            /* Users user = new Users
+             {
+                 FirstName = use.FirstName,
+                 Lastname = use.Lastname,
+                 Gender = use.Gender,
+                 Dob = use.Dob,
+                 Email = use.Email,
+                 Password = use.Password
+
+             };*/
+
+           /*  if (ModelState.IsValid)
+                {
+                     return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+            else
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);*/
+        }
+          
+        
+
+        [Route("Login")]
+        [HttpPost]
+        public void Post([FromBody] Login  login)
+        {
+            _userRepository.VerifyLogin(login);
         }
 
         // PUT api/<ValuesController>/5

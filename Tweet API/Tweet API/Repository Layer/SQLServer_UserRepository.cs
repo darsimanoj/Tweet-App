@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿
+
 using System.Linq;
-using System.Threading.Tasks;
+
 using Tweet_API.DTO;
 using Tweet_API.Models;
 
@@ -18,9 +17,11 @@ namespace Tweet_API.Repository_Layer
         }
         public bool Add(Users user)
         {
-            db.Users.Add(user);
-            int res = db.SaveChanges();
-            return res > 0 ? true : false;
+            
+                db.Users.Add(user);
+                int res = db.SaveChanges();
+                return res > 0 ? true : false;
+           
         }
 
         public bool Update(Users user)
@@ -29,6 +30,20 @@ namespace Tweet_API.Repository_Layer
             u.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             int res = db.SaveChanges();
             return res > 0 ? true : false;
+        }
+
+        public bool ValidateEmail(string email)
+        {
+            return (db.Users.FirstOrDefault(x => x.Email == email) != null) ? true : false;
+        }
+
+        public bool VerifyLogin (Login login) 
+        {
+            Users user = db.Users.FirstOrDefault(x =>  x.Email == login.username && x.Password == login.password);
+            if (user == null) {
+                return false;
+            }
+            return true;
         }
     }
 }
