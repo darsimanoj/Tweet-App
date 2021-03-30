@@ -59,9 +59,9 @@ namespace Tweet_API.Controllers
 
         [Route("Login")]
         [HttpPost]
-        public void Post([FromBody] Login  login)
+        public bool Post([FromBody] Login  login)
         {
-            _userRepository.VerifyLogin(login);
+            return _userRepository.VerifyLogin(login);
         }
 
         // PUT api/<ValuesController>/5
@@ -74,6 +74,7 @@ namespace Tweet_API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _userRepository.DeleteUser(id);
         }
     }
 }

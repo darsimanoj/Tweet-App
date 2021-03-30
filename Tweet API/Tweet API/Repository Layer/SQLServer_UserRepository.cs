@@ -43,7 +43,19 @@ namespace Tweet_API.Repository_Layer
             if (user == null) {
                 return false;
             }
-            return true;
+            user.LoggedInStatus = true;
+
+            db.Users.Update(user);
+            int res = db.SaveChanges();
+            return res > 0 ? true : false;
+        }
+
+        public bool DeleteUser (int Id)
+        {
+            Users use = db.Users.FirstOrDefault(x => x.UId == Id);
+            db.Users.Remove(use);
+            int res = db.SaveChanges();
+            return res > 0 ? true : false;
         }
     }
 }

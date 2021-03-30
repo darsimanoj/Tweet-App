@@ -13,5 +13,8 @@ namespace Tweet_API.Repository_Layer
         bool Update(Users user);
         bool VerifyLogin(Login login);
         bool ValidateEmail(string email);
+
+        bool DeleteUser(int Id);
+
     }
 }

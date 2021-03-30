@@ -14,7 +14,7 @@ namespace Tweet_API.Models
         {
             Tweets = new HashSet<Tweets>();
         }
-    
+
         public int? UId { get; set; }
 
         [Required]
@@ -25,7 +25,7 @@ namespace Tweet_API.Models
         public string Lastname { get; set; }
 
         [Required]
-        [RegularExpression(@"^M(ale)?$|^F(emale)?$")]
+        [RegularExpression(@"^Male$|^Female$")]
         public string Gender { get; set; }
 
         [Display(Name = "Date of Birth")]
@@ -42,6 +42,7 @@ namespace Tweet_API.Models
         [Required]
         [StringLength(10)]
         public string Password { get; set; }
+        public bool LoggedInStatus { get; set; }
 
         public virtual ICollection<Tweets> Tweets { get; set; }
     }

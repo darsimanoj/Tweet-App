@@ -27,8 +27,8 @@ namespace Tweet_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=TweetData;user = sa;password = pass@word1;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("server=localhost;user=sa;password=pass@word1;database=TweetData");
             }
         }
 
@@ -102,6 +102,8 @@ namespace Tweet_API.Models
                 entity.Property(e => e.Lastname)
                     .HasMaxLength(25)
                     .IsUnicode(false);
+
+                entity.Property(e => e.LoggedInStatus).HasColumnName("LoggedIn_Status");
 
                 entity.Property(e => e.Password)
                     .IsRequired()

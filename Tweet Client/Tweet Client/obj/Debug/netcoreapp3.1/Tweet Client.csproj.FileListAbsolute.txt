@@ -1,0 +1,17 @@
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Tweet Client.exe
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Tweet Client.deps.json
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Tweet Client.runtimeconfig.json
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Tweet Client.runtimeconfig.dev.json
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Tweet Client.dll
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Tweet Client.pdb
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.csprojAssemblyReference.cache
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.AssemblyInfo.cs
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.dll
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.pdb
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.genruntimeconfig.cache
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\User\source\repos\Tweet Client\Tweet Client\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\User\source\repos\Tweet Client\Tweet Client\obj\Debug\netcoreapp3.1\Tweet Client.csproj.CopyComplete
