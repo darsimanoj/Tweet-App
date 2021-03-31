@@ -20,16 +20,23 @@ namespace Tweet_API.Controllers
     public class UserController : ApiController
     {
        public readonly IUserRepository _userRepository;
-        TweetDataContext db = new TweetDataContext();
+        //TweetDataContext db = new TweetDataContext();
         public UserController(IUserRepository uRepository) => _userRepository = uRepository;
 
         // GET api/<ValuesController>/5
-        [HttpGet]
+       /* [HttpGet] 
         public IEnumerable<Users> Get()
         {
             List<Users> l = db.Users.ToList();
             return l;
+        }*/
+
+        [HttpGet("{email}")]
+        public bool Get(string email)
+        {
+            return _userRepository.ValidateEmail(email);
         }
+
 
         // POST api/<ValuesController>
         [HttpPost]
@@ -59,15 +66,35 @@ namespace Tweet_API.Controllers
 
         [Route("Login")]
         [HttpPost]
-        public bool Post([FromBody] Login  login)
+        public Info Post([FromBody] Login  login)
         {
-            return _userRepository.VerifyLogin(login);
+            Users u = _userRepository.VerifyLogin(login);
+            if (u == null)
+            {
+                return null;
+            }
+            else
+            {
+                return new Info() { Id = (int) u.UId, Username = u.Email };
+            }
+            
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Route("Logout")]
+        [HttpPost]
+        public bool Post([FromBody] int id)
         {
+            return _userRepository.Logout(id);
+
+        }
+        // PUT api/<ValuesController>/5
+        [HttpPut("{email}")]
+        public bool Put(string email,[FromBody] string password)
+        {
+           
+                
+                return _userRepository.UpdatePassword(email, password);
+            
         }
 
         // DELETE api/<ValuesController>/5

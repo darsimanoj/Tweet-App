@@ -37,23 +37,43 @@ namespace Tweet_API.Repository_Layer
             return (db.Users.FirstOrDefault(x => x.Email == email) != null) ? true : false;
         }
 
-        public bool VerifyLogin (Login login) 
+        public Users VerifyLogin (Login login) 
         {
             Users user = db.Users.FirstOrDefault(x =>  x.Email == login.username && x.Password == login.password);
             if (user == null) {
-                return false;
+                return null;
             }
             user.LoggedInStatus = true;
 
             db.Users.Update(user);
             int res = db.SaveChanges();
-            return res > 0 ? true : false;
+            return res > 0 ? user : null;
         }
+
 
         public bool DeleteUser (int Id)
         {
             Users use = db.Users.FirstOrDefault(x => x.UId == Id);
             db.Users.Remove(use);
+            int res = db.SaveChanges();
+            return res > 0 ? true : false;
+        }
+
+        public bool UpdatePassword(string email, string password)
+        {
+           
+                Users user = db.Users.FirstOrDefault(x => x.Email == email);
+                user.Password = password;
+                db.Users.Update(user);
+                int res = db.SaveChanges();
+                return res > 0 ? true : false;
+            
+        }
+
+        public bool Logout(int id)
+        {
+            Users u = db.Users.FirstOrDefault(x => x.UId == id);
+            u.LoggedInStatus = false;
             int res = db.SaveChanges();
             return res > 0 ? true : false;
         }

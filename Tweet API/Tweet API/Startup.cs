@@ -33,7 +33,8 @@ namespace Tweet_API
             services.AddControllers();
             services.AddDbContext<TweetDataContext>();
             services.AddScoped<IUserRepository, SQLServer_UserRepository>();
-            
+            services.AddScoped<ITweetRepository, SQLServer_TweetRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

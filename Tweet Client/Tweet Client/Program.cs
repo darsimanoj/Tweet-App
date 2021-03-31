@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace Tweet_Client
 {
-    class Program
+    public static class Program
     {
-        static bool LoginStatus = false;
-        static HttpClient client = new HttpClient();
+        public static bool LoginStatus = false;
+        public static Info i;
+        public static HttpClient client = new HttpClient();
         static void Main(string[] args)
         {
 
-              Console.WriteLine("Welcome To Tweet APP");
+            //Console.WriteLine("Welcome To Tweet APP");
             RunAsync().GetAwaiter().GetResult();
 
         }
@@ -36,20 +37,8 @@ namespace Tweet_Client
                 if (!LoginStatus)
                     await Process1Async();
                 else
-                     Process2Async();
+                     await Process2Async();
             }
-             
-
-  
-
-           
-            
-            Console.ReadLine();
-        }
-
-        private static void Process2Async()
-        {
-            Console.WriteLine("2 process");
             Console.ReadLine();
         }
 
@@ -63,7 +52,7 @@ namespace Tweet_Client
                 case 1:
                     try
                     {
-                        var url = await Register();
+                        var url = await Primary.Register(client);
 
                         // Console.WriteLine(await url.Content.ReadAsStringAsync());
                         var a = await url.Content.ReadAsStringAsync();
@@ -96,12 +85,15 @@ namespace Tweet_Client
                 case 2:
                     try
                     {
-                        var url = await Login();
-                        var a = await url.Content.ReadAsStringAsync();
-                        if(a == "true")
+                        var url = await Primary.Login(client);
+                         var a = await url.Content.ReadAsStringAsync();
+                        if(a != "")
                         {
                             Console.WriteLine("Login Successfull");
                             LoginStatus = true;
+                            var jo = JObject.Parse(a);
+                            
+                            i = new Info() { Id = (int)jo["id"], Username = (string)jo["username"] };
                         }
                         else 
                         {
@@ -115,71 +107,86 @@ namespace Tweet_Client
                     }
                      break;
                 case 3:
-                    
+                    try
+                    {
+                        await Primary.ForgotPassword(client);
+                        
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("please enter valid number");
                     break;
             }
         }
 
-        static async Task<HttpResponseMessage> Login()
+        
+        private static async Task Process2Async()
         {
-            Console.WriteLine("Please Enter Your Login Credentials\n1.UserName (Required)\n2.Password (Required)\n");
-            var UserName = Console.ReadLine();
-            var Password = Console.ReadLine();
-
-            Login login = new Login()
+            Console.WriteLine("Please Select The Below Options to Proceed Further\n1.Post a Tweet\n2.View my tweets\n3.View All Users and their respective tweets\n4.Reset Password\n5.Logout");
+            int secondary_Choice = Convert.ToInt32(Console.ReadLine());
+            switch (secondary_Choice)
             {
-                username = UserName,
-                password = Password
+                case 1:
+                    try
+                    {
+                         await SecondaryProcess.Tweet(client);
 
-            };
+                        
 
-            HttpResponseMessage response = await client.PostAsJsonAsync("api/User/Login", login);
-            return response;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message.ToString());
+                    }
+                    break;
+
+                case 2:
+                    try
+                    {
+                         await SecondaryProcess.GetUserTweets(client);
+                        
+                       
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
+                case 3:
+                    try
+                    {
+                        await SecondaryProcess.GetAllUsersAndTweets(client);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
+                case 5:
+                    try 
+                    {
+                        await SecondaryProcess.Logout(client);
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("please enter valid number");
+                    break;
+            }
+
+
+            //Console.ReadLine();
         }
-        static async Task<HttpResponseMessage>? Register()
-        {
-            Console.WriteLine("Please Enter Your Details as Below For Registration\n1.FirstName (Required)\n2.LastName (Optional)\n3.Gender (Male/Female) (Required)\n4.Birth Date (Optional, dd-MM-yyyy)\n5.UserName (Required, Must be Unique)\n6.Password (Required)\n");
-            var FirstName = Console.ReadLine();
-            var Lastname = Console.ReadLine();
-            var Gender = Console.ReadLine();
-            var Dob = Console.ReadLine();
-            var Email = Console.ReadLine();
-            var Password = Console.ReadLine();
-            User u = new User
-            {
-                FirstName = FirstName,
-                Lastname = Lastname,
-                Gender = Gender,
-                Dob  = string.IsNullOrWhiteSpace(Dob)? (DateTime?)null : Convert.ToDateTime(Dob),
-                Email = Email,
-                Password = Password
-            };
-
-            HttpResponseMessage response = await client.PostAsJsonAsync("api/User", u);
-            return response;
-
-            /* var context = new ValidationContext(u, null, null);
-             var result = new List<ValidationResult>(); var isValid = Validator.TryValidateObject(u, context, result, true);
- */
-
-            /* if (result.Count == 0)
-             {
-                 HttpResponseMessage response = await client.PostAsJsonAsync("api/User", u);
-                 return response;
-             }
-             else
-             {
-                 foreach (var str in result)
-                 {
-                     Console.WriteLine(str.ErrorMessage.ToString());
-                 }
-
-                 return null;
-             }*/
-
-            //response.EnsureSuccessStatusCode();
 
 
-        }
+      
     }
 }
