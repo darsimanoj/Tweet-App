@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace Tweet_Client
 {
-   public  static class SecondaryProcess
+    public static class SecondaryProcess
     {
         public static async Task Tweet(HttpClient client)
         {
             Console.WriteLine("Post a Tweet");
             string tweet = Console.ReadLine();
-            HttpResponseMessage response = await client.PostAsJsonAsync("api/Tweet/"+ Program.i.Id,  tweet);
+            HttpResponseMessage response = await client.PostAsJsonAsync("api/Tweet/" + Program.i.Id, tweet);
             var a = await response.Content.ReadAsStringAsync();
-            if(a == "true")
+            if (a == "true")
             {
                 Console.WriteLine("Tweeted Successfully");
             }
-            else 
+            else
             {
                 Console.WriteLine("Post failed, i am sorry try again");
             }
-            
+
 
         }
 
@@ -34,7 +34,7 @@ namespace Tweet_Client
             //string tweet = Console.ReadLine();
             HttpResponseMessage response = await client.GetAsync("api/Tweet/" + Program.i.Id);
             var a = await response.Content.ReadAsStringAsync();
-            if(a != "")
+            if (a != "")
             {
                 var jo = JArray.Parse(a);
                 foreach (var x in jo)
@@ -63,12 +63,12 @@ namespace Tweet_Client
                 foreach (var x in jo)
                 {
                     Console.WriteLine(x.Key);
-                   /* var y = JArray.Parse(() x.Value);*/
+                    /* var y = JArray.Parse(() x.Value);*/
                     foreach (string de in x.Value)
                     {
                         Console.WriteLine(de);
                     }
-                        
+
                     /*var y = JObject.Parse(x);
                     Console.WriteLine(y.ToString());
                     foreach (var j in y)
@@ -108,5 +108,31 @@ namespace Tweet_Client
 
 
         }
+
+        public static async Task LoggedInResetPassword(HttpClient client)
+        {
+            Console.WriteLine("Enter your Old Password\nEnter your New Password");
+            var old = Console.ReadLine();
+            var ne = Console.ReadLine();
+            //string tweet = Console.ReadLine();
+            List<string> res = new List<string>()
+            {
+                Program.i.Username, old, ne
+            };
+            HttpResponseMessage response = await client.PostAsJsonAsync("api/User/LoggedReset", res);
+            var a = await response.Content.ReadAsStringAsync();
+            if (a != "false")
+            {
+
+               
+                Console.WriteLine("Password updation Successfull");
+            }
+            else
+            {
+                Console.WriteLine("Password updation Failed");
+            }
+
+        }
     }
 }
+    

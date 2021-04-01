@@ -167,6 +167,17 @@ namespace Tweet_Client
                         Console.WriteLine(e);
                     }
                     break;
+                case 4:
+                    try
+                    {
+                        await SecondaryProcess.LoggedInResetPassword(client);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    break;
                 case 5:
                     try 
                     {

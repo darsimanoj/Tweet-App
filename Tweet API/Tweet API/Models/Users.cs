@@ -29,8 +29,10 @@ namespace Tweet_API.Models
         public string Gender { get; set; }
 
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
         //[RegularExpression(@"(d{1,2}/-d{1,2}/-d{2,4})$", ErrorMessage = "Invalid date format.")]
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        /*[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]*/
         public DateTime? Dob { get; set; }
 
         [Display(Name = "UserName")]

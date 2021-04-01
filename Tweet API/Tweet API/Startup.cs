@@ -34,7 +34,14 @@ namespace Tweet_API
             services.AddDbContext<TweetDataContext>();
             services.AddScoped<IUserRepository, SQLServer_UserRepository>();
             services.AddScoped<ITweetRepository, SQLServer_TweetRepository>();
+            services.AddScoped<IJavaScriptService, JavaScriptService>();
 
+            // Add node js
+            services.AddNodeServices(options =>
+            {
+                //options.LaunchWithDebugging = true;
+                //options.UseSocketHosting();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

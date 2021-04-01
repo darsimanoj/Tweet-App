@@ -20,24 +20,43 @@ namespace Tweet_API.Controllers
     public class UserController : ApiController
     {
        public readonly IUserRepository _userRepository;
-        //TweetDataContext db = new TweetDataContext();
-        public UserController(IUserRepository uRepository) => _userRepository = uRepository;
+        private IJavaScriptService _javaScriptService;
 
-        // GET api/<ValuesController>/5
-       /* [HttpGet] 
-        public IEnumerable<Users> Get()
-        {
-            List<Users> l = db.Users.ToList();
-            return l;
-        }*/
+        //TweetDataContext db = new TweetDataContext();
+        public UserController(IUserRepository uRepository, IJavaScriptService javaScriptService) { _userRepository = uRepository; _javaScriptService = javaScriptService; }
+
+            // GET api/<ValuesController>/5
+            /* [HttpGet] 
+             public IEnumerable<Users> Get()
+             {
+                 List<Users> l = db.Users.ToList();
+                 return l;
+             }*/
 
         [HttpGet("{email}")]
         public bool Get(string email)
         {
             return _userRepository.ValidateEmail(email);
         }
+        [HttpGet("hello")]
+        public async Task<IActionResult> Hello()
+        {
+            string ret = await _javaScriptService.Hello("Michael");
+            return Ok(ret);
+        }
 
-
+        [Route("LoggedReset")]
+        [HttpPost]
+        public bool Post([FromBody] List<string> user)
+        {
+            bool s =_userRepository.verifyOldPassword(user[0], user[1]);
+            if(s)
+            {
+                return _userRepository.UpdatePassword(user[0], user[2]);
+            }
+            return s;
+        }
+        [Route("Register")]
         // POST api/<ValuesController>
         [HttpPost]
         public void  Post([FromBody] Users user)

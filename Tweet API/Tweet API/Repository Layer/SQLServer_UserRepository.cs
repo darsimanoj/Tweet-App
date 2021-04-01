@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.JSInterop;
 using System.Linq;
 
 using Tweet_API.DTO;
@@ -17,11 +18,14 @@ namespace Tweet_API.Repository_Layer
         }
         public bool Add(Users user)
         {
-            
+            if (!@ValidateEmail(user.Email))
+            {
                 db.Users.Add(user);
                 int res = db.SaveChanges();
                 return res > 0 ? true : false;
-           
+            }
+
+            return false;
         }
 
         public bool Update(Users user)
@@ -58,7 +62,7 @@ namespace Tweet_API.Repository_Layer
             int res = db.SaveChanges();
             return res > 0 ? true : false;
         }
-
+        
         public bool UpdatePassword(string email, string password)
         {
            
@@ -69,13 +73,26 @@ namespace Tweet_API.Repository_Layer
                 return res > 0 ? true : false;
             
         }
-
+        
         public bool Logout(int id)
         {
             Users u = db.Users.FirstOrDefault(x => x.UId == id);
             u.LoggedInStatus = false;
             int res = db.SaveChanges();
             return res > 0 ? true : false;
+        }
+
+        public bool verifyOldPassword(string email, string oldPassword)
+        {
+            Users user = db.Users.FirstOrDefault(x => x.Email == email && x.Password == oldPassword);
+            if (user == null)
+            {
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Tweet_Client
             var a = await response.Content.ReadAsStringAsync();
             if (a == "true")
             {
-                Console.WriteLine("Please Entert your Password");
+                Console.WriteLine("Please Entert New Password");
                 string password = Console.ReadLine();
                 if (password == "" | password.Length > 10) { Console.WriteLine("Password is not valid"); }
                 else
@@ -90,7 +90,7 @@ namespace Tweet_Client
                 Password = Password
             };
 
-            HttpResponseMessage response = await client.PostAsJsonAsync("api/User", u);
+            HttpResponseMessage response = await client.PostAsJsonAsync("api/User/Register", u);
             return response;
 
            

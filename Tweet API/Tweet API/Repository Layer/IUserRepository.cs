@@ -18,5 +18,7 @@ namespace Tweet_API.Repository_Layer
 
         bool UpdatePassword(string email,string password);
         bool Logout(int id);
+
+        bool verifyOldPassword(string email, string oldPassword);
     }
 }
