@@ -30,6 +30,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.13",
           "Microsoft.EntityFrameworkCore.Sqlite": "3.1.13",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.13",
+          "Microsoft.TypeScript.MSBuild": "4.2.3",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
           "Swashbuckle.AspNetCore": "6.1.1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
@@ -1290,6 +1291,7 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
         }
       },
+      "Microsoft.TypeScript.MSBuild/4.2.3": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/3.1.5": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "3.1.13",
@@ -4826,6 +4828,13 @@
       "sha512": "sha512-Nug3rO+7Kl5/SBAadzSMAVgqDlfGjJZ0GenQrLywJ84XGKO0uRqkunz5Wyl0SDwcR71bAATXvSdbdzPrYRYKGw==",
       "path": "microsoft.openapi/1.2.3",
       "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
+    },
+    "Microsoft.TypeScript.MSBuild/4.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6fOvql61DU9SHGeyIKkKZjt1m9pNuUTQnKq/E9IizlQQwtvA1s97zD8PXcGQ4UdXK6LFSWT4zZtLY2trpSZUhw==",
+      "path": "microsoft.typescript.msbuild/4.2.3",
+      "hashPath": "microsoft.typescript.msbuild.4.2.3.nupkg.sha512"
     },
     "Microsoft.VisualStudio.Web.CodeGeneration/3.1.5": {
       "type": "package",

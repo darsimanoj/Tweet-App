@@ -39,17 +39,17 @@ namespace Tweet_Client
                 else
                      await Process2Async();
             }
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         private static async Task Process1Async()
         {
-            
+            Console.WriteLine("");
             Console.WriteLine("Please Select The Below Options to Proceed Further\n1.Register\n2.Login\n3.Forgot Password\n");
-            int Primary_Choice = Convert.ToInt32(Console.ReadLine());
+            string Primary_Choice = Console.ReadLine();
             switch (Primary_Choice)
             {
-                case 1:
+                case "1":
                     try
                     {
                         var url = await Primary.Register(client);
@@ -62,9 +62,13 @@ namespace Tweet_Client
                         //Console.WriteLine(id);
                         //Console.WriteLine(url == null ? "" : await url.Content.ReadAsStringAsync());
 
-                        if (a == "")
+                        if (a == "true")
                         {
                             Console.WriteLine("Your Registration is Successful, Please continue with Login");
+                        }
+                        else if (a == "false")
+                        {
+                            Console.WriteLine("Username already exists");
                         }
                         else
                         {
@@ -76,13 +80,17 @@ namespace Tweet_Client
                         }
                         
                     }
-                    catch (Exception e)
+                    catch (FormatException f)
                     {
+                        Console.WriteLine("please enter a valid date like mentioned '2-2-2020'");
+                    }
+                    catch (Exception e)
+                    { 
                         Console.WriteLine(e.Message.ToString());
                     }
                     break;
 
-                case 2:
+                case "2":
                     try
                     {
                         var url = await Primary.Login(client);
@@ -106,7 +114,7 @@ namespace Tweet_Client
                         Console.WriteLine(e);
                     }
                      break;
-                case 3:
+                case "3":
                     try
                     {
                         await Primary.ForgotPassword(client);
@@ -118,19 +126,21 @@ namespace Tweet_Client
                     }
                     break;
                 default:
-                    Console.WriteLine("please enter valid number");
+                    Console.WriteLine("please enter any digit between 1 to 3");
                     break;
             }
+            Console.WriteLine("");
         }
 
         
         private static async Task Process2Async()
         {
+            Console.WriteLine("");
             Console.WriteLine("Please Select The Below Options to Proceed Further\n1.Post a Tweet\n2.View my tweets\n3.View All Users and their respective tweets\n4.Reset Password\n5.Logout");
-            int secondary_Choice = Convert.ToInt32(Console.ReadLine());
+            string secondary_Choice = Console.ReadLine();
             switch (secondary_Choice)
             {
-                case 1:
+                case "1":
                     try
                     {
                          await SecondaryProcess.Tweet(client);
@@ -144,7 +154,7 @@ namespace Tweet_Client
                     }
                     break;
 
-                case 2:
+                case "2":
                     try
                     {
                          await SecondaryProcess.GetUserTweets(client);
@@ -156,7 +166,7 @@ namespace Tweet_Client
                         Console.WriteLine(e);
                     }
                     break;
-                case 3:
+                case "3":
                     try
                     {
                         await SecondaryProcess.GetAllUsersAndTweets(client);
@@ -167,7 +177,7 @@ namespace Tweet_Client
                         Console.WriteLine(e);
                     }
                     break;
-                case 4:
+                case "4":
                     try
                     {
                         await SecondaryProcess.LoggedInResetPassword(client);
@@ -178,7 +188,7 @@ namespace Tweet_Client
                         Console.WriteLine(e);
                     }
                     break;
-                case 5:
+                case "5":
                     try 
                     {
                         await SecondaryProcess.Logout(client);
@@ -189,10 +199,11 @@ namespace Tweet_Client
                     }
                     break;
                 default:
-                    Console.WriteLine("please enter valid number");
+                    Console.WriteLine("please enter any digit between 1 to 5");
                     break;
             }
 
+            Console.WriteLine("");
 
             //Console.ReadLine();
         }

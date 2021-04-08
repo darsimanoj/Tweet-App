@@ -19,18 +19,20 @@ namespace Tweet_API.Models
 
         [Required]
         [StringLength(25)]
+        [RegularExpression(@"[A-Za-z]*$", ErrorMessage = "Firstname must have only Letters")]
         public string FirstName { get; set; }
 
         [StringLength(25)]
+        [RegularExpression(@"[A-Za-z]*$", ErrorMessage = "Lastname must have only Letters")]
         public string Lastname { get; set; }
 
         [Required]
-        [RegularExpression(@"^Male$|^Female$")]
+        [RegularExpression(@"^Male$|^Female$", ErrorMessage = "Please Enter 'Male' or 'Female'.")]
         public string Gender { get; set; }
 
         [Display(Name = "Date of Birth")]
-        [DataType(DataType.Date)]
-        //[RegularExpression(@"(d{1,2}/-d{1,2}/-d{2,4})$", ErrorMessage = "Invalid date format.")]
+        [DataType(DataType.Date, ErrorMessage = "Please Enter a Valid Date")]
+        //[RegularExpression("^([0-9]{1,2})[-]([0-9]{1,2})[-]([0-9]{4,4})$", ErrorMessage = "Invalid date format.")]
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         /*[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]*/
         public DateTime? Dob { get; set; }

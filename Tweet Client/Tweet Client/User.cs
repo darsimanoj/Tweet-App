@@ -34,6 +34,6 @@ namespace Tweet_Client
             [StringLength(10)]
             public string Password { get; set; }
 
-           
+      
     }
 }

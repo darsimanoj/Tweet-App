@@ -59,9 +59,9 @@ namespace Tweet_API.Controllers
         [Route("Register")]
         // POST api/<ValuesController>
         [HttpPost]
-        public void  Post([FromBody] Users user)
+        public bool  Post([FromBody] Users user)
         {
-            _userRepository.Add(user);
+            return _userRepository.Add(user);
             /* Users user = new Users
              {
                  FirstName = use.FirstName,

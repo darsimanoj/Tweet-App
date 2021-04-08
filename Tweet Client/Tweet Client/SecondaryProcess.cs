@@ -54,6 +54,7 @@ namespace Tweet_Client
         public static async Task GetAllUsersAndTweets(HttpClient client)
         {
             Console.WriteLine("Getting all users, tweets");
+            Console.WriteLine("");
             //string tweet = Console.ReadLine();
             HttpResponseMessage response = await client.GetAsync("api/Tweet/");
             var a = await response.Content.ReadAsStringAsync();
@@ -62,7 +63,7 @@ namespace Tweet_Client
                 var jo = JObject.Parse(a);
                 foreach (var x in jo)
                 {
-                    Console.WriteLine(x.Key);
+                    Console.WriteLine("Name"+"=>" +x.Key);
                     /* var y = JArray.Parse(() x.Value);*/
                     foreach (string de in x.Value)
                     {
@@ -76,6 +77,7 @@ namespace Tweet_Client
                         Console.WriteLine(j);
                     }*/
                     Console.WriteLine("======");
+                    Console.WriteLine("");
                 }
             }
             else
@@ -111,8 +113,9 @@ namespace Tweet_Client
 
         public static async Task LoggedInResetPassword(HttpClient client)
         {
-            Console.WriteLine("Enter your Old Password\nEnter your New Password");
+            Console.WriteLine("Enter your Old Password");
             var old = Console.ReadLine();
+            Console.WriteLine("Enter your New Password");
             var ne = Console.ReadLine();
             //string tweet = Console.ReadLine();
             List<string> res = new List<string>()
